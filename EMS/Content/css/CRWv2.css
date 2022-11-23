@@ -1,0 +1,169 @@
+﻿/*table {
+    max-width: 90%!important;
+}*/
+
+.fixed-table-container-inner {
+    /*height: 118%;*/
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.fixed-table-container {
+    height: 2000%;
+    margin: 10px auto;
+    padding-top: 10px;
+    position: relative;
+    width: 100%;
+}
+
+.fixed-table-container-inner table th {
+    padding: 0 5px;
+    text-align: left;
+    /*min-width: 125px;*/
+    color: #000000;
+    font-size: 12px;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    float: right;
+    margin-right: 100px;
+    display: inline;
+}
+
+.fontAriel {
+    line-height: 20px;
+}
+
+label {
+    color: #ffffff;
+}
+
+button, input, optgroup, select, textarea {
+    color: black;
+}
+
+.content-header > .breadcrumb {
+    float: left;
+}
+
+div.DTE_Inline div.DTE_Field input.form-control {
+    height: 20px;
+}
+
+table.dataTable.stripe tbody > tr.odd.HEADER, table.dataTable.stripe tbody > tr.odd > .HEADER, table.dataTable.display tbody > tr.odd.HEADER, table.dataTable.display tbody > tr.odd > .HEADER table.dataTable.stripe tbody > tr.even.HEADER, table.dataTable.stripe tbody > tr.even > .HEADER, table.dataTable.display tbody > tr.even.HEADER, table.dataTable.display tbody > tr.even > .HEADER {
+    background-color: #5c8fbe !important;
+    color: white !important;
+    font-weight: bolder !important;
+    background-color: aliceblue;
+}
+
+table.dataTable.display tbody > tr.odd.selected > .sorting_2, table.dataTable.order-column.stripe tbody > tr.odd.selected > .sorting_2, table.dataTable.display tbody > tr.odd.selected > .sorting_1, table.dataTable.order-column.stripe tbody > tr.odd.selected > .sorting_1, table.dataTable.display tbody tr.even > .sorting_2, table.dataTable.order-column.stripe tbody tr.even > .sorting_2, table.dataTable.display tbody tr.even > .sorting_2, table.dataTable.order-column.stripe tbody tr.even > .sorting_2, table.dataTable.display tbody tr.odd > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd > .sorting_2, table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+    background-color: inherit;
+}
+
+table.dataTable.display tbody > tr.selected:hover > .sorting_2, table.dataTable.order-column.hover tbody > tr.selected:hover > .sorting_2 {
+    background-color: #5c8fbe !important;
+    color: white !important;
+    font-weight: bolder !important;
+}
+
+.ETCnegative {
+    background: red;
+    color: white;
+}
+
+table.dataTable.display tbody > tr.selected:hover > .sorting_2, table.dataTable.order-column.hover tbody > tr.selected:hover > .sorting_2 {
+    background-color: #f6f6f6;
+}
+
+table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting {
+    background-image: none;
+}
+
+.childhidden {
+    background-color: aliceblue;
+}
+
+
+
+#tblNotesList {
+    width: 100% !important;
+}
+
+.ui-widget-header {
+    background: #cccccc url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") 50% 50% repeat-x;
+    color: #222222;
+    font-weight: bold;
+}
+
+.ui-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.ui-widget-header .ui-icon {
+    background-image: url("../../Images/icons.png");
+}
+
+.ui-icon-closethick {
+    background-position: -96px -128px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.fixed-table-container-inner-crw {
+    overflow-x: hidden;
+    overflow-y: auto;
+}*/
+
+.fixed-table-container-crw table {
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.fixed-table-container-crw table th.first .th-inner {
+    border-left: medium none;
+    padding-left: 6px;
+}
+
+.th-inner {
+    border-left: 1px solid #ccc;
+    line-height: 30px;
+    margin-left: -5px;
+    padding-left: 5px;
+    position: absolute;
+    text-align: left;
+    top: 0;
+}
+
+.fixed-table-container-crw table td {
+    border-bottom: 1px solid #CCCCCC;
+    padding: 0px;
+    text-align: left;
+}
+
+.fixed-table-container-crw table td + td {
+    border-left: 1px solid #CCCCCC;
+}
+
+.fixed-table-container-crw table th {
+    padding: 0 0px;
+    text-align: left;
+    min-width: 50px;
+    color: #000000;
+    font-size: 12px;
+}

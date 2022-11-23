@@ -1,0 +1,236 @@
+﻿@{
+    ViewBag.Title = "Report>>POReports";
+    Layout = "~/Views/Shared/_LayoutReports.cshtml";
+}
+
+
+@section BreadCrumb{
+   
+  <section class="content-header">
+    <div class="form-group">
+        <label>Select a Report</label>
+        <div class="midMenu pull-left">
+            <ul>
+                <li class="active" id="liPOListing"><a href="#tabEditAudit" data-toggle="tab" aria-expanded="true" onclick="javascript: ShowHide('Audit');">PO Audit</a></li>
+                <li class="" id="liPOHistory"><a href="#tabEditAudit" data-toggle="tab" aria-expanded="true">PO History Reports</a></li>
+
+                
+            </ul>
+        </div>
+    </div>
+      
+      <a class="btn btn-default floatRight pull-right marginRight10 " onclick="javascript: funPreview(true);" style="display:inline;" id="btn" title="Export to CSV/Excel File">Export</a>
+      <a class="btn btn-default floatRight  pull-right marginRight10" style="display:inline;" onclick="javascript: funPreview();" id="btnApply">Preview</a>
+     
+    <div class="clearfix"></div>
+
+</section>
+}
+
+@section Body{
+
+<section class="content" id="dvMainDv">
+    <div class="row fontAriel" id="dvFilterDv">
+        <div class="tab-content">
+
+            <div id="tabPendingInvoices" class="tab-pane active widget-body-regular">
+                <div class="col-xs-12">
+
+                    <div id="tabEditAudit" class="tab-pane active widget-body-regular">
+
+                        <div id="POReportdiv">
+                            <div style="width: 25% !important;float: left;">
+                                <ol class="breadcrumb floatLeft"></ol>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-group">
+                                <label style="width:214px!important;">Report Date</label>
+                                <input type="text" class="form-control  pull-left datepicker" id="txtPOFilterReportDate" tabindex="1" />
+
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label style="width:200px!important;">Company</label>
+                                <div style="width: 160px !important; float: left; margin-left: 13px; margin-bottom:2px;">
+                                    <select id="ddlPOFilterCompany" multiple="multiple" style="display:none;"></select>
+                                </div>
+                                @*<select id="ddlPOFilterCompany" tabindex="2" class="form-control  pull-left" style="margin-left:13px !important;"></select>*@
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group" id="POFilterLocationGroup" style="display:none;">
+                                <label style="width:200px!important;" id="POFilterLocationLabel">Locaton</label>
+                                <div style="width: 160px !important; float: left; margin-left: 13px; margin-bottom:2px;">
+                                    <select id="POFilterLocation" multiple="multiple" style="display:none;"></select>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group" id="POFilterEpisodeGroup" style="display:none;">
+                                <label style="width:200px!important;" id="POFilterEpisodeLabel">Episode</label>
+                                <div style="width: 160px !important; float: left; margin-left: 13px; margin-bottom:2px;">
+                                    <select id="POFilterEpisode" multiple="multiple" style="display:none;"></select>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label style="width:200px!important;">Account No. From</label>
+                                <input type="text" id="POFilterAccountFrom" class="form-control pull-left segments-detail" style="margin-left:13px !important;">
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label style="width:200px!important;">Account No. To</label>
+                                <input type="text" id="POFilterAccountTo" class="form-control pull-left segments-detail" style="margin-left:13px !important;">
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group" id="POFilterSetGroup" style="display:none;">
+                                <label style="width:200px!important;" id="POFilterSetLabel">Set(s)</label>
+                                <div style="width: 160px !important; float: left; margin-left: 13px; margin-bottom:2px;">
+                                    <select id="POFilterFilterSet" multiple="multiple" style="display:none;"></select>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-group">
+                                <label style="width:200px!important;">Period No. From </label>
+                                <input type="text" tabindex="3" id="txtPOFilterPeriodNoFrom" onfocus="javascript: GetPeriodForPO(this);" class="SearchPOPeriod form-control  pull-left " style="margin-left:13px !important;">
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label style="width:200px!important;">Period No. To </label>
+                                <input type="text" tabindex="4" id="txtPOFilterPeriodNoTo" onfocus="javascript: GetPeriodForPO(this);" class="SearchPOPeriod form-control  pull-left " style="margin-left:13px !important;">
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-group">
+                                <label style="width:200px!important;">PO No. From </label>
+                                <input type="text" tabindex="4" id="txtPOFilterFrom" class="form-control  pull-left " style="margin-left:13px !important;">
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label style="width:200px!important;">PO No. To </label>
+                                <input type="text" tabindex="4" id="txtPOFilterTo" class="form-control  pull-left " style="margin-left:13px !important;">
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-group">
+                                <label style="width:200px!important;">Create Date From</label>
+                                <input type="text" tabindex="5" id="txtPOFilterCreateDateFrom" class="form-control  pull-left datepicker" style="margin-left:13px !important;" placeholder="MM/DD/YYYY">
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label style="width:200px!important;">Create Date To</label>
+                                <input type="text" tabindex="6" id="txtPOFilterCreateDateTo" class="form-control  pull-left datepicker" style="margin-left:13px !important;" placeholder="MM/DD/YYYY">
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label style="width:200px!important;">Vendor Name</label>
+                                <div style="width: 18.3% !important; float: left; margin-left: 13px; margin-bottom:2px;">
+                                    <select id="ddlPOFilterVendor" multiple="multiple" style="display:none;" onfocus="javascript:funVendorFilter();"></select>
+                                </div>
+                            </div><!-- /.form-group -->
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+
+                                <label style="width:200px!important;">Batch</label>
+                                <div style=" width: 18.3% !important; float: left; margin-left: 13px; margin-bottom:2px;">
+                                    <select id="ddlPOFilterBatch" tabindex="10" multiple class="form-control  pull-left" style="" onfocus="javascript:funBatchNumberFilter();"></select>
+                                </div><!-- /.form-group -->
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                    <label style="width:200px!important;">User Name</label>
+                                    <div style="width: 18.3% !important;float: left; margin-left: 13px; margin-bottom: 2px;">
+                                        <select id="ddlPOFilterUserName" tabindex="11" multiple class="form-control  pull-left" style="" onfocus="javascript:funGetUserFilter();"></select>
+                                    </div>
+                                </div><!-- /.form-group -->
+
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                    <label style="width:200px!important;">PO Status</label>
+                                    <div style="width: 18.3% !important;float: left; margin-left: 13px; margin-bottom: 2px;">
+                                        <select id="ddlPOFilterStatus" tabindex="12" class="form-control  pull-left" style="">
+                                            <option value="">Select</option>
+                                            <option>Closed</option>
+                                            <option>Open</option>
+                                            @*<option>Post</option>*@
+                                            <option>Partial</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div id="dialog11" style="display: none"> </div>
+</section>
+
+<div id="fade" class="black_overlay"></div>
+}
+
+
+@section Javascript{
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+<script src="~/Content/js/jquery-ui.js"></script>
+<script src="~/Content/libs/bootstrap-multiselect.js"></script>
+<script src="~/Scripts/Reports/ReportEngine.js"></script>
+<script src="~/Scripts/Reports/POReports.js"></script>
+<link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/blitzer/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/libs/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/papaparse.min.js"></script>
+@*<script>
+    $(function () {
+        $(".datepicker").datepicker();
+    });
+
+
+</script>*@
+<script>
+    //$(function () {
+    //    $(".datepicker").datepicker();
+    //});
+
+    $(function () {
+        $(".datepicker").datepicker(
+            {
+                onClose: function () {
+                    $(this).focus();
+                }
+            });
+    });
+
+</script>
+
+
+
+<style type="text/css">
+    .black_overlay, #fade {
+        display: none !important;
+    }
+
+    #TblPosted_paginate {
+        position: fixed;
+        bottom: 4%;
+        float: right !important;
+        right: 2%;
+    }
+
+    #TblPosted_info {
+        position: fixed;
+        bottom: 6%;
+    }
+    .ui-dialog {
+        width: 80% !important;
+        z-index: 999999999;
+    }
+</style>
+}
+
+

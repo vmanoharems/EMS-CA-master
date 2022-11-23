@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CAAdminModelStoreContainer" CdmEntityContainer="CAAdminEntities">
+    <EntitySetMapping Name="CAUserAdmins">
+      <EntityTypeMapping TypeName="CAAdminModel.CAUserAdmin">
+        <MappingFragment StoreEntitySet="CAUserAdmin">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="AuthenticationCode" ColumnName="AuthenticationCode" />
+          <ScalarProperty Name="PasswordModiedDate" ColumnName="PasswordModiedDate" />
+          <ScalarProperty Name="Accountstatus" ColumnName="Accountstatus" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+          <ScalarProperty Name="AdminFlag" ColumnName="AdminFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Divisions">
+      <EntityTypeMapping TypeName="CAAdminModel.Division">
+        <MappingFragment StoreEntitySet="Division">
+          <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
+          <ScalarProperty Name="Studioid" ColumnName="Studioid" />
+          <ScalarProperty Name="DivisionName" ColumnName="DivisionName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modules">
+      <EntityTypeMapping TypeName="CAAdminModel.Module">
+        <MappingFragment StoreEntitySet="Module">
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="ModuleLevel" ColumnName="ModuleLevel" />
+          <ScalarProperty Name="Children" ColumnName="Children" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Productions">
+      <EntityTypeMapping TypeName="CAAdminModel.Production">
+        <MappingFragment StoreEntitySet="Production">
+          <ScalarProperty Name="ProductionId" ColumnName="ProductionId" />
+          <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ProductionCode" ColumnName="ProductionCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductionConfigs">
+      <EntityTypeMapping TypeName="CAAdminModel.ProductionConfig">
+        <MappingFragment StoreEntitySet="ProductionConfig">
+          <ScalarProperty Name="ProductionConfigId" ColumnName="ProductionConfigId" />
+          <ScalarProperty Name="ProductionId" ColumnName="ProductionId" />
+          <ScalarProperty Name="DBName" ColumnName="DBName" />
+          <ScalarProperty Name="DBConnectionString" ColumnName="DBConnectionString" />
+          <ScalarProperty Name="DBLogin" ColumnName="DBLogin" />
+          <ScalarProperty Name="DBPassword" ColumnName="DBPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Studios">
+      <EntityTypeMapping TypeName="CAAdminModel.Studio">
+        <MappingFragment StoreEntitySet="Studio">
+          <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+          <ScalarProperty Name="StudioName" ColumnName="StudioName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProductions">
+      <EntityTypeMapping TypeName="CAAdminModel.UserProduction">
+        <MappingFragment StoreEntitySet="UserProduction">
+          <ScalarProperty Name="UserproductionId" ColumnName="UserproductionId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Prodid" ColumnName="Prodid" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+          <ScalarProperty Name="Groupbatchaccess" ColumnName="Groupbatchaccess" />
+          <ScalarProperty Name="Canclose" ColumnName="Canclose" />
+          <ScalarProperty Name="Allbatchaccess" ColumnName="Allbatchaccess" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="addproductionaccessforuser" FunctionName="CAAdminModel.Store.addproductionaccessforuser" />
+    <FunctionImportMapping FunctionImportName="CheckAuthenticationCode" FunctionName="CAAdminModel.Store.CheckAuthenticationCode">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CAAdminModel.CheckAuthenticationCode_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="AuthenticationCode" ColumnName="AuthenticationCode" />
+          <ScalarProperty Name="PasswordModiedDate" ColumnName="PasswordModiedDate" />
+          <ScalarProperty Name="Accountstatus" ColumnName="Accountstatus" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+          <ScalarProperty Name="AdminFlag" ColumnName="AdminFlag" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CheckEmailVaild" FunctionName="CAAdminModel.Store.CheckEmailVaild" />
+    <FunctionImportMapping FunctionImportName="CheckNewDBName" FunctionName="CAAdminModel.Store.CheckNewDBName" />
+    <FunctionImportMapping FunctionImportName="CheckUserexistanceCAAdmin" FunctionName="CAAdminModel.Store.CheckUserexistanceCAAdmin" />
+    <FunctionImportMapping FunctionImportName="GetAccessByKeyToken" FunctionName="CAAdminModel.Store.GetAccessByKeyToken">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CAAdminModel.GetAccessByKeyToken_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="AuthenticationCode" ColumnName="AuthenticationCode" />
+          <ScalarProperty Name="PasswordModiedDate" ColumnName="PasswordModiedDate" />
+          <ScalarProperty Name="Accountstatus" ColumnName="Accountstatus" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+          <ScalarProperty Name="AdminFlag" ColumnName="AdminFlag" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetDBConfigByProdId" FunctionName="CAAdminModel.Store.GetDBConfigByProdId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CAAdminModel.GetDBConfigByProdId_Result">
+          <ScalarProperty Name="ProductionConfigId" ColumnName="ProductionConfigId" />
+          <ScalarProperty Name="ProductionId" ColumnName="ProductionId" />
+          <ScalarProperty Name="DBName" ColumnName="DBName" />
+          <ScalarProperty Name="DBConnectionString" ColumnName="DBConnectionString" />
+          <ScalarProperty Name="DBLogin" ColumnName="DBLogin" />
+          <ScalarProperty Name="DBPassword" ColumnName="DBPassword" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetProdcutionListByUserId" FunctionName="CAAdminModel.Store.GetProdcutionListByUserId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CAAdminModel.GetProdcutionListByUserId_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ProductionId" ColumnName="ProductionId" />
+          <ScalarProperty Name="ProductionCode" ColumnName="ProductionCode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserDetailsAdmin" FunctionName="CAAdminModel.Store.GetUserDetailsAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CAAdminModel.GetUserDetailsAdmin_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="AuthenticationCode" ColumnName="AuthenticationCode" />
+          <ScalarProperty Name="PasswordModiedDate" ColumnName="PasswordModiedDate" />
+          <ScalarProperty Name="Accountstatus" ColumnName="Accountstatus" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+          <ScalarProperty Name="AdminFlag" ColumnName="AdminFlag" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserDetailsPassword" FunctionName="CAAdminModel.Store.GetUserDetailsPassword">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CAAdminModel.GetUserDetailsPassword_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="AuthenticationCode" ColumnName="AuthenticationCode" />
+          <ScalarProperty Name="PasswordModiedDate" ColumnName="PasswordModiedDate" />
+          <ScalarProperty Name="Accountstatus" ColumnName="Accountstatus" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+          <ScalarProperty Name="AdminFlag" ColumnName="AdminFlag" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertEMSUser" FunctionName="CAAdminModel.Store.InsertEMSUser" />
+    <FunctionImportMapping FunctionImportName="InsertOnlyCausersbyemailID" FunctionName="CAAdminModel.Store.InsertOnlyCausersbyemailID" />
+    <FunctionImportMapping FunctionImportName="InsertUpdateAdminUser" FunctionName="CAAdminModel.Store.InsertUpdateAdminUser" />
+    <FunctionImportMapping FunctionImportName="InsertupdateUserProduction" FunctionName="CAAdminModel.Store.InsertupdateUserProduction" />
+    <FunctionImportMapping FunctionImportName="ProductionNewDBCreate" FunctionName="CAAdminModel.Store.ProductionNewDBCreate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CAAdminModel.ProductionNewDBCreate_Result">
+          <ScalarProperty Name="prodId" ColumnName="prodId" />
+          <ScalarProperty Name="DBName" ColumnName="DBName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateAuthCode" FunctionName="CAAdminModel.Store.UpdateAuthCode">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CAAdminModel.UpdateAuthCode_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="AuthenticationCode" ColumnName="AuthenticationCode" />
+          <ScalarProperty Name="PasswordModiedDate" ColumnName="PasswordModiedDate" />
+          <ScalarProperty Name="Accountstatus" ColumnName="Accountstatus" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+          <ScalarProperty Name="AdminFlag" ColumnName="AdminFlag" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdatePasswordOfUser" FunctionName="CAAdminModel.Store.UpdatePasswordOfUser" />
+    <FunctionImportMapping FunctionImportName="UpdateUserStatusAdmin" FunctionName="CAAdminModel.Store.UpdateUserStatusAdmin" />
+    <FunctionImportMapping FunctionImportName="AdminAPIToolsLedgerJournal" FunctionName="CAAdminModel.Store.AdminAPIToolsLedgerJournal" />
+  </EntityContainerMapping>
+</Mapping>

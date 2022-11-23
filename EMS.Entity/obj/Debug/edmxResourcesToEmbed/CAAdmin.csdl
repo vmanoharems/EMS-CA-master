@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CAAdminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CAUserAdmin">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AuthenticationCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordModiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Accountstatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Createddate" Type="DateTime" Precision="3" />
+    <Property Name="modifieddate" Type="DateTime" Precision="3" />
+    <Property Name="createdby" Type="Int32" />
+    <Property Name="modifiedby" Type="Int32" />
+    <Property Name="AdminFlag" Type="Boolean" />
+    <NavigationProperty Name="UserProductions" Relationship="Self.FK__UserProdu__UserI__2D27B809" FromRole="CAUserAdmin" ToRole="UserProduction" />
+  </EntityType>
+  <EntityType Name="Division">
+    <Key>
+      <PropertyRef Name="DivisionId" />
+    </Key>
+    <Property Name="DivisionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Studioid" Type="Int32" />
+    <Property Name="DivisionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Module">
+    <Key>
+      <PropertyRef Name="ModuleId" />
+    </Key>
+    <Property Name="ModuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ModuleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="ModuleLevel" Type="Int32" Nullable="false" />
+    <Property Name="Children" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Production">
+    <Key>
+      <PropertyRef Name="ProductionId" />
+    </Key>
+    <Property Name="ProductionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudioId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DivisionId" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ProductionCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProductionConfig">
+    <Key>
+      <PropertyRef Name="ProductionConfigId" />
+    </Key>
+    <Property Name="ProductionConfigId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductionId" Type="Int32" />
+    <Property Name="DBName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DBConnectionString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DBLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DBPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Studio">
+    <Key>
+      <PropertyRef Name="StudioId" />
+    </Key>
+    <Property Name="StudioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudioName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserProduction">
+    <Key>
+      <PropertyRef Name="UserproductionId" />
+    </Key>
+    <Property Name="UserproductionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="Prodid" Type="Int32" />
+    <Property Name="Createddate" Type="DateTime" Precision="3" />
+    <Property Name="modifieddate" Type="DateTime" Precision="3" />
+    <Property Name="createdby" Type="Int32" />
+    <Property Name="modifiedby" Type="Int32" />
+    <Property Name="Groupbatchaccess" Type="Boolean" />
+    <Property Name="Canclose" Type="Boolean" />
+    <Property Name="Allbatchaccess" Type="Boolean" />
+    <NavigationProperty Name="CAUserAdmin" Relationship="Self.FK__UserProdu__UserI__2D27B809" FromRole="UserProduction" ToRole="CAUserAdmin" />
+  </EntityType>
+  <Association Name="FK__UserProdu__UserI__2D27B809">
+    <End Role="CAUserAdmin" Type="Self.CAUserAdmin" Multiplicity="0..1" />
+    <End Role="UserProduction" Type="Self.UserProduction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAUserAdmin">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserProduction">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CAAdminEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CAUserAdmins" EntityType="Self.CAUserAdmin" />
+    <EntitySet Name="Divisions" EntityType="Self.Division" />
+    <EntitySet Name="Modules" EntityType="Self.Module" />
+    <EntitySet Name="Productions" EntityType="Self.Production" />
+    <EntitySet Name="ProductionConfigs" EntityType="Self.ProductionConfig" />
+    <EntitySet Name="Studios" EntityType="Self.Studio" />
+    <EntitySet Name="UserProductions" EntityType="Self.UserProduction" />
+    <AssociationSet Name="FK__UserProdu__UserI__2D27B809" Association="Self.FK__UserProdu__UserI__2D27B809">
+      <End Role="CAUserAdmin" EntitySet="CAUserAdmins" />
+      <End Role="UserProduction" EntitySet="UserProductions" />
+    </AssociationSet>
+    <FunctionImport Name="addproductionaccessforuser" ReturnType="Collection(Int32)">
+      <Parameter Name="AdminUserid" Mode="In" Type="Int32" />
+      <Parameter Name="ProdID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CheckAuthenticationCode" ReturnType="Collection(CAAdminModel.CheckAuthenticationCode_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="AuthenticationCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CheckEmailVaild" ReturnType="Collection(Int32)">
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Admin" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CheckNewDBName" ReturnType="Collection(Int32)">
+      <Parameter Name="DBName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CheckUserexistanceCAAdmin" ReturnType="Collection(Int32)">
+      <Parameter Name="Email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetAccessByKeyToken" ReturnType="Collection(CAAdminModel.GetAccessByKeyToken_Result)">
+      <Parameter Name="Email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetDBConfigByProdId" ReturnType="Collection(CAAdminModel.GetDBConfigByProdId_Result)">
+      <Parameter Name="ProdId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetProdcutionListByUserId" ReturnType="Collection(CAAdminModel.GetProdcutionListByUserId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserDetailsAdmin" ReturnType="Collection(CAAdminModel.GetUserDetailsAdmin_Result)">
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserDetailsPassword" ReturnType="Collection(CAAdminModel.GetUserDetailsPassword_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertEMSUser" ReturnType="Collection(Int32)">
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="AuthenticationCode" Mode="In" Type="String" />
+      <Parameter Name="Accountstatus" Mode="In" Type="String" />
+      <Parameter Name="Status" Mode="In" Type="Boolean" />
+      <Parameter Name="createdby" Mode="In" Type="Int32" />
+      <Parameter Name="AdminFlag" Mode="In" Type="Boolean" />
+      <Parameter Name="ProdId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertOnlyCausersbyemailID">
+      <Parameter Name="AdminUserId" Mode="In" Type="Int32" />
+      <Parameter Name="EmailID" Mode="In" Type="String" />
+      <Parameter Name="Prodid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertUpdateAdminUser" ReturnType="Collection(Int32)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="AuthCode" Mode="In" Type="String" />
+      <Parameter Name="AccountStatus" Mode="In" Type="String" />
+      <Parameter Name="Status" Mode="In" Type="Boolean" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertupdateUserProduction">
+      <Parameter Name="ProdId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ProductionNewDBCreate" ReturnType="Collection(CAAdminModel.ProductionNewDBCreate_Result)">
+      <Parameter Name="ProdName" Mode="In" Type="String" />
+      <Parameter Name="StudioId" Mode="In" Type="Int32" />
+      <Parameter Name="DivisionId" Mode="In" Type="Int32" />
+      <Parameter Name="status" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="ProductionCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateAuthCode" ReturnType="Collection(CAAdminModel.UpdateAuthCode_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="AuthCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdatePasswordOfUser">
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateUserStatusAdmin">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="Status" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="AdminAPIToolsLedgerJournal" ReturnType="Collection(String)">
+      <Parameter Name="JSONparameters" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="CheckAuthenticationCode_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AuthenticationCode" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="PasswordModiedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Accountstatus" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="DateTime" Name="Createddate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="modifieddate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="createdby" Nullable="true" />
+    <Property Type="Int32" Name="modifiedby" Nullable="true" />
+    <Property Type="Boolean" Name="AdminFlag" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetAccessByKeyToken_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AuthenticationCode" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="PasswordModiedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Accountstatus" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="DateTime" Name="Createddate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="modifieddate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="createdby" Nullable="true" />
+    <Property Type="Int32" Name="modifiedby" Nullable="true" />
+    <Property Type="Boolean" Name="AdminFlag" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetDBConfigByProdId_Result">
+    <Property Type="Int32" Name="ProductionConfigId" Nullable="false" />
+    <Property Type="Int32" Name="ProductionId" Nullable="true" />
+    <Property Type="String" Name="DBName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="DBConnectionString" Nullable="true" />
+    <Property Type="String" Name="DBLogin" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="DBPassword" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetProdcutionListByUserId_Result">
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="ProductionId" Nullable="true" />
+    <Property Type="String" Name="ProductionCode" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="GetUserDetailsAdmin_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AuthenticationCode" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="PasswordModiedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Accountstatus" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="DateTime" Name="Createddate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="modifieddate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="createdby" Nullable="true" />
+    <Property Type="Int32" Name="modifiedby" Nullable="true" />
+    <Property Type="Boolean" Name="AdminFlag" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetUserDetailsPassword_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AuthenticationCode" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="PasswordModiedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Accountstatus" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="DateTime" Name="Createddate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="modifieddate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="createdby" Nullable="true" />
+    <Property Type="Int32" Name="modifiedby" Nullable="true" />
+    <Property Type="Boolean" Name="AdminFlag" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ProductionNewDBCreate_Result">
+    <Property Type="Int32" Name="prodId" Nullable="true" />
+    <Property Type="String" Name="DBName" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="UpdateAuthCode_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AuthenticationCode" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="PasswordModiedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Accountstatus" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="DateTime" Name="Createddate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="modifieddate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="createdby" Nullable="true" />
+    <Property Type="Int32" Name="modifiedby" Nullable="true" />
+    <Property Type="Boolean" Name="AdminFlag" Nullable="true" />
+  </ComplexType>
+</Schema>

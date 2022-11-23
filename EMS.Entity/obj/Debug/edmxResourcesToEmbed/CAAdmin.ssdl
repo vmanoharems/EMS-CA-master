@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CAAdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CAUserAdmin">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" />
+    <Property Name="AuthenticationCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="PasswordModiedDate" Type="datetime" />
+    <Property Name="Accountstatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Createddate" Type="datetime" />
+    <Property Name="modifieddate" Type="datetime" />
+    <Property Name="createdby" Type="int" />
+    <Property Name="modifiedby" Type="int" />
+    <Property Name="AdminFlag" Type="bit" />
+  </EntityType>
+  <EntityType Name="Division">
+    <Key>
+      <PropertyRef Name="DivisionId" />
+    </Key>
+    <Property Name="DivisionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Studioid" Type="int" />
+    <Property Name="DivisionName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Module">
+    <Key>
+      <PropertyRef Name="ModuleId" />
+    </Key>
+    <Property Name="ModuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ModuleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ParentID" Type="int" />
+    <Property Name="ModuleLevel" Type="int" Nullable="false" />
+    <Property Name="Children" Type="int" />
+  </EntityType>
+  <EntityType Name="Production">
+    <Key>
+      <PropertyRef Name="ProductionId" />
+    </Key>
+    <Property Name="ProductionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudioId" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="DivisionId" Type="int" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ProductionCode" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="ProductionConfig">
+    <Key>
+      <PropertyRef Name="ProductionConfigId" />
+    </Key>
+    <Property Name="ProductionConfigId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductionId" Type="int" />
+    <Property Name="DBName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DBConnectionString" Type="nvarchar(max)" />
+    <Property Name="DBLogin" Type="nvarchar" MaxLength="50" />
+    <Property Name="DBPassword" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Studio">
+    <Key>
+      <PropertyRef Name="StudioId" />
+    </Key>
+    <Property Name="StudioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudioName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserProduction">
+    <Key>
+      <PropertyRef Name="UserproductionId" />
+    </Key>
+    <Property Name="UserproductionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Prodid" Type="int" />
+    <Property Name="Createddate" Type="datetime" />
+    <Property Name="modifieddate" Type="datetime" />
+    <Property Name="createdby" Type="int" />
+    <Property Name="modifiedby" Type="int" />
+    <Property Name="Groupbatchaccess" Type="bit" />
+    <Property Name="Canclose" Type="bit" />
+    <Property Name="Allbatchaccess" Type="bit" />
+  </EntityType>
+  <Association Name="FK__UserProdu__UserI__2D27B809">
+    <End Role="CAUserAdmin" Type="Self.CAUserAdmin" Multiplicity="0..1" />
+    <End Role="UserProduction" Type="Self.UserProduction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAUserAdmin">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserProduction">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AdminAPIToolsLedgerJournal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JSONparameters" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="addproductionaccessforuser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AdminUserid" Type="int" Mode="In" />
+    <Parameter Name="ProdID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CheckAuthenticationCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="AuthenticationCode" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="CheckEmailVaild" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Admin" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="CheckNewDBName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DBName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="CheckUserexistanceCAAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetAccessByKeyToken" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetDBConfigByProdId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProdId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetProdcutionListByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetUserDetailsAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetUserDetailsPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertEMSUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+    <Parameter Name="AuthenticationCode" Type="nvarchar" Mode="In" />
+    <Parameter Name="Accountstatus" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="bit" Mode="In" />
+    <Parameter Name="createdby" Type="int" Mode="In" />
+    <Parameter Name="AdminFlag" Type="bit" Mode="In" />
+    <Parameter Name="ProdId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertOnlyCausersbyemailID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AdminUserId" Type="int" Mode="In" />
+    <Parameter Name="EmailID" Type="varchar" Mode="In" />
+    <Parameter Name="Prodid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertUpdateAdminUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="password" Type="nvarchar" Mode="In" />
+    <Parameter Name="AuthCode" Type="nvarchar" Mode="In" />
+    <Parameter Name="AccountStatus" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="bit" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertupdateUserProduction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProdId" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ProductionNewDBCreate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProdName" Type="nvarchar" Mode="In" />
+    <Parameter Name="StudioId" Type="int" Mode="In" />
+    <Parameter Name="DivisionId" Type="int" Mode="In" />
+    <Parameter Name="status" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="ProductionCode" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateAuthCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="AuthCode" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UpdatePasswordOfUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateUserStatusAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="Status" Type="bit" Mode="In" />
+  </Function>
+  <EntityContainer Name="CAAdminModelStoreContainer">
+    <EntitySet Name="CAUserAdmin" EntityType="Self.CAUserAdmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Production" EntityType="Self.Production" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductionConfig" EntityType="Self.ProductionConfig" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Studio" EntityType="Self.Studio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProduction" EntityType="Self.UserProduction" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__UserProdu__UserI__2D27B809" Association="Self.FK__UserProdu__UserI__2D27B809">
+      <End Role="CAUserAdmin" EntitySet="CAUserAdmin" />
+      <End Role="UserProduction" EntitySet="UserProduction" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

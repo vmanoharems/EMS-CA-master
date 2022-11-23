@@ -1,0 +1,211 @@
+﻿@{
+    ViewBag.Title = "Reports>>APInvoiceReports";
+    Layout = "~/Views/Shared/_LayoutReports.cshtml";
+}
+@section BreadCrumb{
+    <section class="content-header"> 
+        <div class="form-group"> 
+            <label>Select a Report</label> 
+            <div class="midMenu pull-left"> 
+                <ul> 
+                    <li class="active" id="liInvoiceAudit"><a href="#" data-toggle="tab" aria-expanded="true" onclick="javascript: ShowHide('Pending');">AP Invoice Edit/Audit</a></li> 
+                    <li class="" id='liInvoicePosting'><a class="" href="#" data-toggle="tab" aria-expanded="false" onclick="javascript: ShowHide('Posting');">AP Invoice Posting</a></li> 
+                </ul> 
+            </div> 
+        </div> 
+        <a href="#" class="btn btn-default floatRight pull-right marginRight10 " onclick="javascript: FunEditInvoice(true);" style="display:inline;" id="btn" title="Export to CSV/Excel File">Export</a> 
+        <a href="#" class="btn btn-default floatRight  pull-right marginRight10" style="display:inline;" onclick="javascript:FunEditInvoice();" id="btnPreview">Preview</a> 
+        <div class="clearfix"></div> 
+    </section> 
+} 
+@section Body{ 
+    <form> 
+        <section class="content" id="dvMainDv"> 
+            <div class="row fontAriel" id="dvFilterDv"> 
+                <section class="content"> 
+                    <div class="row fontAriel"> 
+                        <div class="col-md-12"> 
+                            <div id="DivInvoiceF" style="display:inline;" class="tab-pane active widget-body-regular"> 
+                                <div class="form-group"> 
+                                    <label style="width:200px!important;">Report Format </label> 
+                                    <input type="radio" name="RFormat" id="rbAccount" checked="checked" tabindex="1" /> Account Distribution 
+                                    <input type="radio" name="RFormat" id="rbTransaction" tabindex="1" /> Transaction No. 
+                                </div> 
+                                <div class="clearfix"></div> 
+                                <div class="form-group"> 
+                                    <label style="width:200px!important;">Company</label> 
+                                    <div style="width: 160px !important; float: left; margin-left: 13px; margin-bottom:2px;"> 
+                                        <select style="width: 160px !important;margin-left: 12px;display:none;" onchange="javascript: GetClosePeriod();" id="InvoiceFilterCompany" multiple="multiple"></select> 
+                                    </div> 
+                                </div> 
+                                <div class="clearfix"></div> 
+                                <div class="form-group" id="InvoiceFilterLocationGroup" style="display:none;"> 
+                                    <label id="InvoiceFilterLocationLabel" style="width:200px!important;">Locaton(s)</label> 
+                                    <div style="width: 160px !important; float: left; margin-left: 13px; margin-bottom:2px;"> 
+                                        <select id="InvoiceFilterLocation" multiple="multiple" style="display:none;"></select> 
+                                    </div> 
+                                </div> 
+                                <div class="clearfix"></div> 
+                                <div class="form-group" id="InvoiceFilterSetGroup" style="display:none;"> 
+                                    <label id="InvoiceFilterSetLabel" style="width:200px!important;">Set(s)</label> 
+                                    <div style="width: 160px !important; float: left; margin-left: 13px; margin-bottom:2px;"> 
+                                        <select id="InvoiceFilterSet" multiple="multiple" style="display:none;"></select> 
+                                    </div> 
+                                </div> 
+                                <div class="clearfix"></div> 
+                                <div class="form-group" id="InvoiceFilterEpisodeGroup" style="display:none;"> 
+                                    <label id="InvoiceFilterEpisodeLabel" style="width:200px!important;">Episode(s)</label> 
+                                    <div style="width: 160px !important; float: left; margin-left: 13px; margin-bottom:2px;"> 
+                                        <select id="InvoiceFilterEpisode" multiple="multiple" style="display:none;"></select> 
+                                    </div> 
+                                </div> 
+                                <div class="clearfix"></div> 
+                                <div class="form-group"> 
+                                    <label style="width:200px!important;">Bank</label> 
+                                    <input type="text" id="txtApInvsBank" class="SearchBank form-control  pull-left" tabindex="1" style="margin-left:13px !important;"> 
+                                    <input type="hidden" id="txtApInvshdnBank" /> 
+                                </div><!-- /.form-group --> 
+                                <div class="clearfix"></div> 
+                                <div class="form-group" id="dvAuditCPeriod"> 
+                                    <label style="width:200px!important;">Period Status</label> 
+                                    <div style="width: 160px !important; float: left; margin-left: 13px; margin-bottom:2px;"> 
+                                        <select id="txtApInvsPeriod" tabindex="2" class="form-control  pull-left" style="width: 160px !important;"> 
+                                            <option value="Current">Current</option> 
+                                            <option value="Future">Future</option> 
+                                            <option value="Both">Both</option> 
+                                        </select> 
+                                    </div> 
+                                </div> 
+                                <div class="clearfix"></div> 
+                                <div class="form-group"> 
+                                    <label style="width:200px!important;">Invoice Date From:</label> 
+                                    <input type="text" id="txtApInvsCreatedFrom" tabindex="3" class="form-control  pull-left datepicker" style="margin-left:13px !important;" placeholder="MM/DD/YYYY"> 
+                                </div><!-- /.form-group --> 
+                                <div class="clearfix"></div> 
+                                <div class="form-group"> 
+                                    <label style="width:200px!important;">Invoice Date To:</label> 
+                                    <input type="text" id="txtApInvsCreatedTo" tabindex="3" onfocus="javascript:SetfocustoNext();" class="form-control  pull-left datepicker" style="margin-left:13px !important;" placeholder="MM/DD/YYYY"> 
+                                </div><!-- /.form-group --> 
+                                <div class="clearfix"></div> 
+                                <div class="form-group"> 
+                                    <label style="width:200px!important;">Transaction No. From:</label> 
+                                    <input type="text" id="txtInvoiceTransFrom" tabindex="5" class="form-control  pull-left" style="margin-left:13px !important;"> 
+                                </div><!-- /.form-group --> 
+                                <div class="clearfix"></div> 
+                                <div class="form-group"> 
+                                    <label style="width:200px!important;">Transaction No. To:</label> 
+                                    <input type="text" id="txtInvoiceTransTo" tabindex="6" class="form-control  pull-left" style="margin-left:13px !important;"> 
+                                </div><!-- /.form-group --> 
+                                <div class="clearfix"></div> 
+                                <div class="form-group"> 
+                                    <label style="width:200px!important;">Vendor Name</label> 
+                                    <div style="width: 160px !important; float: left; margin-left: 13px; margin-bottom:2px;"> 
+                                        <select id="ddlInvoiceVendor" tabindex="7" multiple class="form-control  pull-left" style="" onfocus="javascript:funVendorFilter();"></select> 
+                                    </div> 
+                                    <div class="clearfix"></div> 
+                                    <div class="form-group"> 
+                                        <label style="width:200px!important;">Batch</label> 
+                                        <div style="width: 160px !important; float: left; margin-left: 13px; margin-bottom:2px;"> 
+                                            <select id="ddlInvoiceBatch" tabindex="8" multiple class="form-control  pull-left" style="" onfocus="javascript:funBatchNumberFilter();"></select> 
+                                        </div> 
+                                        <div class="clearfix"></div> 
+                                        <div class="form-group"> 
+                                            <label style="width:200px!important;">User Name</label> 
+                                            <div style="width: 160px !important; float: left; margin-left: 13px; margin-bottom:2px;"> 
+                                                <select id="ddlInvoiceUserName" multiple class="form-control  pull-left" tabindex="9" style="" onfocus="javascript:funGetUserFilter();"></select> 
+                                            </div> 
+                                            <div class="clearfix"></div> 
+                                            <div class="clearfix"></div> 
+                                            <div class="form-group" style="display:none;"> 
+                                                <label style="width:200px!important;">Include Location Sub-Total</label> 
+                                                <input type="checkbox" id="txtModuleMyDefName" class="pull-left" style="margin-left:13px !important;"> 
+                                            </div><!-- /.form-group --> 
+                                            <div class="clearfix"></div> 
+                                            <div class="form-group" style="display:none;"> 
+                                                <label style="width:200px!important;">Include Episode Sub-Total</label> 
+                                                <input type="checkbox" id="txtModuleMyDefName" class="pull-left" style="margin-left:13px !important;"> 
+                                            </div><!-- /.form-group --> 
+                                        </div> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                        </div> 
+                    </div> 
+                </section> 
+            </div> 
+            <div id="dialog11" style="display: none"> </div>
+        </section> 
+        <div class="newhidden" id="dvWait" style="display: none;width: 100%;margin: auto 0px;text-align: center;top: 30%;"> 
+            <img src="~/Images/InternetSlowdown_Day.gif" /> 
+        </div> 
+    </form> 
+} 
+
+@section Javascript{
+    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/blitzer/jquery-ui.css"
+          rel="stylesheet" type="text/css" />
+    <script>
+
+        // This is an example jQuery snippet that makes the dialogs work
+        $(document).ready(function () {
+
+            // We have two control functions that show or hide dialogs
+            function showDialog(id) {
+
+                // Find the dialog and show it
+
+                var dialog = $('#' + id),
+                        card = dialog.find('.dialog-card');
+
+                dialog.fadeIn();
+
+                // Center it on screen
+
+                card.css({
+                    'margin-top': -card.outerHeight() / 2
+                });
+
+            }
+            function hideAllDialogs() {
+                // Hide all visible dialogs
+                $('.dialog-overlay').fadeOut();
+            }
+
+            // Here is how to use these functions
+
+            $('.dialog-confirm-button, .dialog-reject-button').on('click', function () {
+                hideAllDialogs();
+            });
+
+            $('.dialog-show-button').on('click', function () {
+                var toShow = $(this).data('show-dialog');
+
+                showDialog(toShow);
+            });
+        });
+
+    </script>
+    <script src="~/Content/libs/bootstrap-multiselect.js"></script>
+    <script src="~/Scripts/Reports/ReportEngine.js"></script>
+    <script src="~/Scripts/Reports/EditInvoiceReport.js"></script>
+    <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/blitzer/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/libs/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/papaparse.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker();
+        });
+
+    </script>
+    <style>
+        .ui-dialog {
+            width: 80% !important;
+            z-index: 999999999;
+        }
+
+        .displayNone {
+            display: none;
+        }
+    </style>
+}
